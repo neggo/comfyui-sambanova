@@ -45,7 +45,7 @@ print(response)
 `NODE_CLASS_MAPPINGS`や`NODE_DISPLAY_NAME_MAPPINGS`を使い、ComfyUI等のノードフレームワークに組み込めます。
 
 ### ノードの使用例
-![SambaNova Node Example](https://github.com/your-username/comfyui-sambanova/raw/main/images/sambanova_node.png)
+![SambaNova Node Example](comfyui-sambanova-screenshot.png)
 
 上記の画像のように、ComfyUIのワークフローにSambaNova APIノードを追加し、以下のパラメータを設定できます：
 
@@ -108,7 +108,7 @@ print(response)
 You can integrate this as a node in frameworks like ComfyUI using `NODE_CLASS_MAPPINGS` and `NODE_DISPLAY_NAME_MAPPINGS`.
 
 #### Node Usage Example
-![SambaNova Node Example](https://github.com/your-username/comfyui-sambanova/raw/main/images/sambanova_node.png)
+![SambaNova Node Example](comfyui-sambanova-screenshot.png)
 
 As shown in the image above, you can add the SambaNova API node to your ComfyUI workflow and configure the following parameters:
 
