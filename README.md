@@ -1,6 +1,4 @@
-# README.md
-
-## 日本語
+# comfyui-sambanova
 
 ### 概要
 このリポジトリは、SambaNovaのAPIを利用してチャットAIモデル（例: DeepSeek-V3-0324）にプロンプトを送信し、応答を取得するPythonノードを提供します。ComfyUIなどのノードベースのワークフローに組み込むことを想定しています。
@@ -45,6 +43,17 @@ print(response)
 
 #### ノードとしての利用
 `NODE_CLASS_MAPPINGS`や`NODE_DISPLAY_NAME_MAPPINGS`を使い、ComfyUI等のノードフレームワークに組み込めます。
+
+### ノードの使用例
+![SambaNova Node Example](https://github.com/your-username/comfyui-sambanova/raw/main/images/sambanova_node.png)
+
+上記の画像のように、ComfyUIのワークフローにSambaNova APIノードを追加し、以下のパラメータを設定できます：
+
+- `api_key`: SambaNova APIキー
+- `prompt`: 送信するプロンプト
+- `system_prompt`: システムプロンプト（AIの役割設定）
+- `model`: 使用するモデル名
+
 
 ### 注意事項
 - APIキーはSambaNovaの公式サイトから取得してください。
@@ -97,6 +106,16 @@ print(response)
 
 #### As a Node
 You can integrate this as a node in frameworks like ComfyUI using `NODE_CLASS_MAPPINGS` and `NODE_DISPLAY_NAME_MAPPINGS`.
+
+#### Node Usage Example
+![SambaNova Node Example](https://github.com/your-username/comfyui-sambanova/raw/main/images/sambanova_node.png)
+
+As shown in the image above, you can add the SambaNova API node to your ComfyUI workflow and configure the following parameters:
+
+- `api_key`: Your SambaNova API key
+- `prompt`: The prompt to send
+- `system_prompt`: System prompt (AI role setting)
+- `model`: Model name to use
 
 ### Notes
 - Obtain your API key from the official SambaNova website.
