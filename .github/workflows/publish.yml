@@ -12,16 +12,33 @@ permissions:
 
 jobs:
   publish-node:
-    name: Publish Custom Node to registry
+    name: Publish Custom Node via comfy-cli (stdin workaround)
     runs-on: ubuntu-latest
     if: ${{ github.repository_owner == 'neggo' }}
     steps:
       - name: Check out code
         uses: actions/checkout@v4
-        with:
-          submodules: true
 
-      - name: Publish Custom Node
-        uses: Comfy-Org/publish-node-action@main
+      - name: Clone ComfyUI workspace
+        run: |
+          git clone https://github.com/comfyanonymous/ComfyUI /home/runner/comfy/ComfyUI
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          personal_access_token: ${{ secrets.REGISTRY_ACCESS_TOKEN }}
+          python-version: '3.x'
+
+      - name: Install comfy-cli
+        run: pip install comfy-cli
+
+      - name: Publish Custom Node (pipe API key)
+        env:
+          REGISTRY_KEY: ${{ secrets.REGISTRY_ACCESS_TOKEN }}
+        run: |
+          # printf で API キーと改行を流し込んでプロンプトをバイパス
+          printf '%s\n' "$REGISTRY_KEY" \
+            | comfy \
+              --skip-prompt \
+              --no-enable-telemetry \
+              --workspace /home/runner/comfy/ComfyUI \
+              node publish
