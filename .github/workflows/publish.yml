@@ -12,26 +12,33 @@ permissions:
 
 jobs:
   publish-node:
-    name: Publish Custom Node to registry
+    name: Publish Custom Node via comfy-cli
     runs-on: ubuntu-latest
     if: ${{ github.repository_owner == 'neggo' }}
     steps:
-      - name: Check out code
+      - name: Check out this repository
         uses: actions/checkout@v4
-        with:
-          submodules: true
 
+      # 1. ComfyUI 本体をチェックアウトしてワークスペースを用意
+      - name: Clone ComfyUI workspace
+        run: |
+          git clone https://github.com/comfyanonymous/ComfyUI /home/runner/comfy/ComfyUI
+
+      # 2. Python と comfy-cli のインストール
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-
       - name: Install comfy-cli
         run: pip install comfy-cli
 
-      - name: Publish Custom Node via comfy-cli
+      # 3. 実際の公開コマンド
+      - name: Publish Custom Node
         env:
           COMFY_REGISTRY_API_KEY: ${{ secrets.REGISTRY_ACCESS_TOKEN }}
         run: |
-          # 対話プロンプトをスキップして実行
-          comfy node publish --skip-prompt
+          comfy \
+            --skip-prompt \
+            --no-enable-telemetry \
+            --workspace /home/runner/comfy/ComfyUI \
+            node publish
