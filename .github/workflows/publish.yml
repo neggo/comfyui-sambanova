@@ -20,8 +20,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
-      - name: Publish Custom Node
-        uses: Comfy-Org/publish-node-action@v1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          ## Add your own personal access token to your Github Repository secrets and reference it here.
-          personal_access_token: ${{ secrets.REGISTRY_ACCESS_TOKEN }}
+          python-version: '3.x'
+
+      - name: Install comfy-cli
+        run: pip install comfy-cli
+
+      - name: Publish Custom Node via comfy-cli
+        env:
+          COMFY_REGISTRY_API_KEY: ${{ secrets.REGISTRY_ACCESS_TOKEN }}
+        run: |
+          # 対話プロンプトをスキップして実行
+          comfy node publish --skip-prompt
