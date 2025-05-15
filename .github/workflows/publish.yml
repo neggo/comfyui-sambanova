@@ -41,4 +41,6 @@ jobs:
             --skip-prompt \
             --no-enable-telemetry \
             --workspace /home/runner/comfy/ComfyUI \
-            node publish
+            node publish \
+            --api-key "$COMFY_REGISTRY_API_KEY"
+
